@@ -24,4 +24,21 @@
 	//
 // randomly make answer (char type) 
 	// randomly choose a circle 
-	// 
+
+function color_confusion() {
+	// get canvas HTML element 
+	var canvas = document.getElementById('canvas');
+	var width = canvas.width;
+	var height = canvas.height;
+	var context = canvas.getContext('2d');
+	var score = 0;
+	var answer = 1;
+	var numCircles = 1;
+	
+	while (answer) {
+		// ellipse(x, y, w, h) 
+	}
+	
+	window.alert("Game Over");
+	
+}
