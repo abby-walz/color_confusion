@@ -41,36 +41,36 @@ function color_confusion() {
 		var cHeight;
 		var x;
 		var y;
+		var c1 = [0, 0, 0, 0];
+		var c2 = [0, 0, 0, 0];
+		var c3 = [0, 0, 0, 0];
+		var c4 = [0, 0, 0, 0];
+		var c5 = [0, 0, 0, 0];
+		var c6 = [0, 0, 0, 0];
+		var c7 = [0, 0, 0, 0];
 		switch(numCircles) {
 			case 1:
-				cWidth = width;
-				cHeight = height;
-				var c1 = {
-					x = width / 2;
-					y = x;
-					w = width;
-					h = height;
-				}
+				c1 = [width/2, height/2, w - w/10, w- w/10];
 				break;
 			case 2:
-				var c2 = {
-					x = width / 4;
-					y = height / 2;
-					w = width / 2;
-					h = w;
-				}
-				c1.x += c2.x;
-				
+				c1 = [width/4, height/2, width/2- w/10, width/2- w/10];
+				c2 = [3*width/4, height/2, width/2- w/10, width/2- w/10];
 				break;
 			case 3:
+				c1 = [width/4, height/4, width/2- w/10, width/2- w/10];
+				c2 = [3*width/4, height/4, width/2- w/10, width/2- w/10];
+				c3 = [width/4, 3*height/4, width/2- w/10, height/2- w/10];
 			case 4:
+				c1 = [width/4, height/4, width/2- w/10, width/2- w/10];
+				c2 = [3*width/4, height/4, width/2- w/10, width/2- w/10];
+				c3 = [width/4, 3*height/4, width/2- w/10, height/2- w/10];
+				c4 = [3*width/4, 3*height/4- w/10, width/2, height/2- w/10];
 			case 5:
 			case 6:
 			case 7:
 			default:
 				// 1 circle 
-				cHeight = height;
-				cWidth = width;
+				c1 = [width/2, height/2, w - w/10, w- w/10];
 		}
 	}
 	
