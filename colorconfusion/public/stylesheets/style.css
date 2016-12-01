@@ -17,8 +17,9 @@ h1 {
 
 canvas {
     background-color: #757575;
-    width: 100%;
+    width: 80%;
     height: auto;
+    position: center;
 }
 
 

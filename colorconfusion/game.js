@@ -26,8 +26,9 @@
 	// randomly choose a circle 
 
 function color_confusion() {
-	// get canvas HTML element 
-	var canvas = document.getElementById('canvas');
+	"use strict";
+    // get canvas HTML element 
+	var canvas = document.getElementById('game');
 	var width = canvas.width;
 	var height = canvas.height;
 	var context = canvas.getContext('2d');
@@ -37,43 +38,8 @@ function color_confusion() {
 	
 	while (answer) {
 		// ellipse(x, y, w, h) 
-		var cWidth;
-		var cHeight;
-		var x;
-		var y;
-		var c1 = [0, 0, 0, 0];
-		var c2 = [0, 0, 0, 0];
-		var c3 = [0, 0, 0, 0];
-		var c4 = [0, 0, 0, 0];
-		var c5 = [0, 0, 0, 0];
-		var c6 = [0, 0, 0, 0];
-		var c7 = [0, 0, 0, 0];
-		switch(numCircles) {
-			case 1:
-				c1 = [width/2, height/2, w - w/10, w- w/10];
-				break;
-			case 2:
-				c1 = [width/4, height/2, width/2- w/10, width/2- w/10];
-				c2 = [3*width/4, height/2, width/2- w/10, width/2- w/10];
-				break;
-			case 3:
-				c1 = [width/4, height/4, width/2- w/10, width/2- w/10];
-				c2 = [3*width/4, height/4, width/2- w/10, width/2- w/10];
-				c3 = [width/4, 3*height/4, width/2- w/10, height/2- w/10];
-			case 4:
-				c1 = [width/4, height/4, width/2- w/10, width/2- w/10];
-				c2 = [3*width/4, height/4, width/2- w/10, width/2- w/10];
-				c3 = [width/4, 3*height/4, width/2- w/10, height/2- w/10];
-				c4 = [3*width/4, 3*height/4- w/10, width/2, height/2- w/10];
-			case 5:
-			case 6:
-			case 7:
-			default:
-				// 1 circle 
-				c1 = [width/2, height/2, w - w/10, w- w/10];
-		}
-	}
-	
-	window.alert("Score: " + score);
+		
+    }
+	//window.alert("Score: " + score);
 	
 }
