@@ -37,8 +37,43 @@ function color_confusion() {
 	
 	while (answer) {
 		// ellipse(x, y, w, h) 
+		var cWidth;
+		var cHeight;
+		var x;
+		var y;
+		switch(numCircles) {
+			case 1:
+				cWidth = width;
+				cHeight = height;
+				var c1 = {
+					x = width / 2;
+					y = x;
+					w = width;
+					h = height;
+				}
+				break;
+			case 2:
+				var c2 = {
+					x = width / 4;
+					y = height / 2;
+					w = width / 2;
+					h = w;
+				}
+				c1.x += c2.x;
+				
+				break;
+			case 3:
+			case 4:
+			case 5:
+			case 6:
+			case 7:
+			default:
+				// 1 circle 
+				cHeight = height;
+				cWidth = width;
+		}
 	}
 	
-	window.alert("Game Over");
+	window.alert("Score: " + score);
 	
 }
