@@ -6,40 +6,28 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="stylesheets/style.css">
     <link href='https://fonts.google.com/specimen/Inconsolata?selection.family=Inconsolata' rel='stylesheet' type='text/css'/>
   </head>
 
   <body>
     <h1> Color Confusion</h1>
-    <canvas id="game" onclick="color_confusion()">
       
-      </canvas>
-      
-      // eth = eighth 
-      <div id="whole">
-        <div id="half1">
-          <div id="quart1">
-                <div id="eth1"></div>
-                <div id="eth2"></div>
+    <!-- eth = eighth  -->
+    <div class = "container-fluid">
+        <div class="jumbotron" id="whole">
+            <div class="circle">
+                <div class="circle-text">
+                    Indigo
+                </div> 
             </div>
-        <div id="quart2">
-                <div id="eth3"></div>
-                <div id="eth4"></div>
-            </div>
-          </div>
-        <div id="half2">
-          <div id="quart3">
-                <div id="eth5"></div>
-                <div id="eth6"></div>
-            </div>
-        <div id="quart4">
-                <div id="eth7"></div>
-                <div id="eth8"></div>
-            </div>
-          </div>
-      </div>
-      
+            
+        </div>    
+    </div>
+
       
       <script src ="game.js"></script>
   </body>
