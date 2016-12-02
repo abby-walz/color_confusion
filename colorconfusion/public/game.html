@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Color Confusion Game</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      
+      <!-- firebase; must be at end of html but before other scripts -->
+<script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAeZGjwzDH_U3IkVeG0V7pGJm78gpPPGYc",
+    authDomain: "colorconfusion-3efeb.firebaseapp.com",
+    databaseURL: "https://colorconfusion-3efeb.firebaseio.com",
+    storageBucket: "colorconfusion-3efeb.appspot.com",
+    messagingSenderId: "386566070347"
+  };
+  firebase.initializeApp(config);
+</script>
+      
+      <!-- bootstrap -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="stylesheets/style.css">
+    <link href='https://fonts.google.com/specimen/Inconsolata?selection.family=Inconsolata' rel='stylesheet' type='text/css'/>
+  </head>
+
+  <body>
+    <h1> Color Confusion</h1>
+      
+    <!-- eth = eighth  -->
+    <div id="outer" class = "container-fluid">
+        <div id="whole" class="jumbotron">
+            <div class="circle">
+                <div class="circle-text">
+                    Indigo
+                </div> 
+            </div>
+            
+        </div>    
+    </div>
+
+      
+      <script src ="game.js"></script>
+  </body>
+
+</html>

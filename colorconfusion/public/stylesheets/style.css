@@ -15,7 +15,8 @@ h1 {
 	font-size: 2em;
 }
 
-#whole {
+
+#outer {
     width: 80vmin;
     height: 80vmin;
 }
