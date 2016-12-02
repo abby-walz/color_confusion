@@ -22,6 +22,10 @@ h1 {
     height: 80vmin;
 }
 
+img {
+    width: 100%;
+}
+
 .circle {
     background-color: indigo;
     width: 100%;
