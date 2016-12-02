@@ -15,18 +15,21 @@ h1 {
 	font-size: 2em;
 }
 
+#whole {
+    width: 80vmin;
+    height: 80vmin;
+}
+
 .circle {
     background-color: indigo;
-    width: 100%;
+    width: 100;
     padding-top: 50%;
     padding-bottom: 50%;
     border-radius: 100%;
-    max-height: screen.height;
-    max-width: screen.height;
 }
 .circle-text {
-    width: 100%;
-    height: 100%;
+    width: inherit;
+    height: inherit;
     text-align: center;
 }
 
