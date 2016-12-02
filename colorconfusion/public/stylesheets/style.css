@@ -13,6 +13,7 @@ body,html {
 h1 {
 	font-weight: bold;
 	font-size: 2em;
+    text-align: center;
 }
 
 
@@ -23,7 +24,7 @@ h1 {
 
 .circle {
     background-color: indigo;
-    width: 100;
+    width: 100%;
     padding-top: 50%;
     padding-bottom: 50%;
     border-radius: 100%;
