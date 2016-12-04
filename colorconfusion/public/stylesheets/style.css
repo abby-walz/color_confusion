@@ -20,6 +20,10 @@ h1 {
     background-color: #404040;
 }
 
+.modal-header {
+    border: none;
+}
+
 #outer {
     width: 80vmin;
     height: 80vmin;
