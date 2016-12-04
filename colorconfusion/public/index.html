@@ -25,7 +25,96 @@
   };
   firebase.initializeApp(config);
 </script>
-      
+      <!-- sign up, log in, and log out script -->
+    <script>
+        function mySignUp() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("pw").value;
+            var alias = document.getElementById("alias").value;
+            //console.log("Email: " + email);
+            //console.log("Password: " + password);
+            var errorCode = null;
+            var errorMsg = null;
+            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+                errorCode = error.code;
+                errorMsg = error.message;
+                alert(errorMsg);
+                console.log(error);
+            });
+            if(errorCode == null) {
+                firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+                    console.log(error);
+                })
+                firebase.auth().onAuthStateChanged(function(user) {
+                    if(user) {
+                        document.getElementById("signin").style.display="none";
+                        document.getElementById("login").style.display="none";
+                        document.getElementById("logout").style.display="block";
+                        var usersRef = firebase.database().ref('users/');
+                        var userRef = usersRef.child(alias);
+                        userRef.set({
+                            score: 0
+                        })
+                    }
+                })
+                //initialize user into database with score of 0
+                //var usersRef = firebase.database().ref('users/');
+                //var userRef = usersRef.child(alias);
+                //userRef.set({
+                //    score: 0
+                //})
+                //var newUserRef = userRef.push();
+                //newUserRef.set({
+                //    "alias" : 0
+                //})
+                //var path = newUserRef.toString();
+                //console.log(path);
+                //databaseRef.ref('users/' + alias).set({
+                //    score: 0;
+                //})
+            }
+        }
+               
+        function myLogin() {
+            var email = document.getElementById("loginEmail").value;
+            var password = document.getElementById("loginPw").value;
+            console.log("Email: " + email);
+            console.log("Password: " + password);
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    // User is signed in, hide login/sign up and display logout
+                    console.log("user: " + user.email);
+                    document.getElementById("signin").style.display="none";
+                    document.getElementById("login").style.display="none";
+                    document.getElementById("logout").style.display="block";
+                    
+                } else {
+                    // No user is signed in.
+                    console.log("rip");
+                }
+            });
+            firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+                var errorCode = error.code;
+                var errorMsg = error.message;
+                alert(errorMsg);
+                console.log(error);
+            });
+        }
+        
+        function myLogOut() {
+            firebase.auth().signOut().then(function() {
+                //user is logged out, hide logout and display login/sign up
+                console.log("logout success");
+                document.getElementById("logout").style.display="none";
+                document.getElementById("signin").style.display="block";
+                document.getElementById("login").style.display="block";
+            }, function(error) {
+                console.log(error);
+            });
+        }
+    </script>
+    
+    
       <!-- bootstrap -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -65,6 +154,10 @@
                         <label for="pw">Password:</label>
                         <input type="password" class="form-control" id="pw">
                     </div>
+                    <div class="form-group">
+                        <label for="alias">Alias:</label>
+                        <input type="text" class="form-control" id="alias">
+                    </div>
                     <button type="button" class="btn btn-default" onclick="mySignUp()" data-dismiss="modal" id="signupButton">Submit</button>
                 </form>
             </div>
@@ -96,59 +189,6 @@
         </div>
     </div>
 </div>
-    <!-- sign in and log in script -->
-    <script>
-        function mySignUp() {
-            var email = document.getElementById("email").value;
-            var password = document.getElementById("pw").value;
-            //console.log("Email: " + email);
-            //console.log("Password: " + password);
-            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-                var errorCode = error.code;
-                var errorMsg = error.message;
-                alert(errorMsg);
-                console.log(error);
-            });
-        }
-        
-        function myLogin() {
-            var email = document.getElementById("loginEmail").value;
-            var password = document.getElementById("loginPw").value;
-            console.log("Email: " + email);
-            console.log("Password: " + password);
-            firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-                    // User is signed in.
-                    console.log("user: " + user.email);
-                    document.getElementById("signin").style.display="none";
-                    document.getElementById("login").style.display="none";
-                    document.getElementById("logout").style.display="block";
-                    
-                } else {
-                    // No user is signed in.
-                    console.log("rip");
-                }
-            });
-            firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-                var errorCode = error.code;
-                var errorMsg = error.message;
-                alert(errorMsg);
-                console.log(error);
-            });
-        }
-        
-        function myLogOut() {
-            firebase.auth().signOut().then(function() {
-                console.log("logout success");
-                document.getElementById("logout").style.display="none";
-                document.getElementById("signin").style.display="block";
-                document.getElementById("login").style.display="block";
-            }, function(error) {
-                console.log(error);
-            });
-        }
-    </script>
-    
     
   <body>
     <h1> Color Confusion</h1>
