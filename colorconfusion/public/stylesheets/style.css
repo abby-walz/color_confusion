@@ -16,6 +16,9 @@ h1 {
     text-align: center;
 }
 
+#signUp {
+    background-color: #404040;
+}
 
 #outer {
     width: 80vmin;
