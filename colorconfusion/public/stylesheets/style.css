@@ -20,13 +20,24 @@ h1 {
     background-color: #404040;
 }
 
+.jumbotron {
+    background-color: #404040;
+}
+
 .modal-header {
     border: none;
 }
 
+.row {
+    padding: 1%;
+}
+.col-md-4 {
+    padding: 1%;
+}
 #outer {
     width: 80vmin;
     height: 80vmin;
+    padding: 1%;
 }
 
 img {
@@ -34,17 +45,14 @@ img {
 }
 
 .circle {
-    background-color: indigo;
-    width: 100%;
-    padding-top: 50%;
-    padding-bottom: 50%;
-    border-radius: 100%;
-}
-.circle-text {
-    width: inherit;
-    height: inherit;
+    background-color: red;
+    width: 50;
+    height: 50;
+    border-radius: 50%;
+    padding: 50%;
     text-align: center;
 }
+
 
 #game {
     text-align: center;
