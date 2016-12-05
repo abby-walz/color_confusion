@@ -3,6 +3,11 @@
 
 // Fisher-Yates shuffle
 // source: https://bost.ocks.org/mike/shuffle/
+
+// global
+var ans;
+var score = 0;
+
 function shuffle(array) {
     var m = array.length, t, i;
 
@@ -67,9 +72,8 @@ function color_confusion() {
      document.getElementById("H").style.backgroundColor = colors[7];
      document.getElementById("I").style.backgroundColor = colors[8];
     
+    // change words
     colors = shuffle(colors);
-    
-    // words[0].innerHTML = "Hello World";
      document.getElementById("wordA").innerHTML = colors[0];
      document.getElementById("wordB").innerHTML = colors[1];
      document.getElementById("wordC").innerHTML = colors[2];
@@ -80,4 +84,62 @@ function color_confusion() {
      document.getElementById("wordH").innerHTML = colors[7];
      document.getElementById("wordI").innerHTML = colors[8];
     
+    // generate answer / question
+    ans = Math.floor(Math.random() * 9);
+    document.getElementById("find").innerHTML = colors[ans];
+}
+
+function checkA() { 
+    if (ans == "0") {
+        score = score + 5;
+        document.getElementById("score").innerHTML = score;
+    }
+}
+function checkB() {
+    if (ans == "1") {
+        score = score + 5;
+        document.getElementById("score").innerHTML = score;
+    }
+}
+function checkC() {
+    if (ans == "2") {
+        score = score + 5;
+        document.getElementById("score").innerHTML = score;
+    }
+}
+function checkD() {
+    if (ans == "3") {
+        score = score + 5;
+        document.getElementById("score").innerHTML = score;
+    }
+}
+function checkE() {
+    if (ans == "4") {
+        score = score + 5;
+        document.getElementById("score").innerHTML = score;
+    }
+}
+function checkF() {
+    if (ans == "5") {
+        score = score + 5;
+        document.getElementById("score").innerHTML = score;
+    }
+}
+function checkG() {
+    if (ans == "6") {
+        score = score + 5;
+        document.getElementById("score").innerHTML = score;
+    }
+}
+function checkH() {
+    if (ans == "7") {
+        score = score + 5;
+        document.getElementById("score").innerHTML = score;
+    }
+}
+function checkI() {
+    if (ans == "8") {
+        score = score + 5;
+        document.getElementById("score").innerHTML = score;
+    }
 }
