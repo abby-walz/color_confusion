@@ -33,17 +33,32 @@ img {
     width: 100%;
 }
 
-.circle {
-    background-color: indigo;
-    width: 100%;
-    padding-top: 50%;
-    padding-bottom: 50%;
-    border-radius: 100%;
+#A {
+    background: purple;
 }
-.circle-text {
-    width: inherit;
-    height: inherit;
-    text-align: center;
+
+#B {
+    background: indigo;
+}
+
+#C {
+    background-color: blue;
+}
+
+#D {
+    background-color: yellow;
+}
+
+#E {
+    background-color: red;
+}
+
+#F {
+    background-color: green;
+}
+
+#G {
+    background-color: orange;
 }
 
 #game {
