@@ -28,10 +28,12 @@
       
            <!-- sign up, log in, and log out script -->
     <script>
+        var signedIn = 0;
+        var alias;
         function mySignUp() {
             var email = document.getElementById("email").value;
             var password = document.getElementById("pw").value;
-            var alias = document.getElementById("alias").value;
+            alias = document.getElementById("alias").value;
             //console.log("Email: " + email);
             //console.log("Password: " + password);
             var errorCode = null;
@@ -51,28 +53,22 @@
                         document.getElementById("signin").style.display="none";
                         document.getElementById("login").style.display="none";
                         document.getElementById("logout").style.display="block";
+                        signedIn = 1;
+                        user.updateProfile({
+                            displayName: alias
+                        }).then(function() {
+                            console.log("profile update success");
+                        }, function(error) {
+                           console.log(error); 
+                        });
                         var usersRef = firebase.database().ref('users/');
                         var userRef = usersRef.child(alias);
                         userRef.set({
+                            email: email,
                             score: 0
                         })
                     }
                 })
-                //initialize user into database with score of 0
-                //var usersRef = firebase.database().ref('users/');
-                //var userRef = usersRef.child(alias);
-                //userRef.set({
-                //    score: 0
-                //})
-                //var newUserRef = userRef.push();
-                //newUserRef.set({
-                //    "alias" : 0
-                //})
-                //var path = newUserRef.toString();
-                //console.log(path);
-                //databaseRef.ref('users/' + alias).set({
-                //    score: 0;
-                //})
             }
         }
                
@@ -81,10 +77,19 @@
             var password = document.getElementById("loginPw").value;
             console.log("Email: " + email);
             console.log("Password: " + password);
+            firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+                var errorCode = error.code;
+                var errorMsg = error.message;
+                alert(errorMsg);
+                console.log(error);
+            });
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
                     // User is signed in, hide login/sign up and display logout
                     console.log("user: " + user.email);
+                    signedIn = 1;
+                    var usr = firebase.auth().currentUser;
+                    alias = usr.displayName;
                     document.getElementById("signin").style.display="none";
                     document.getElementById("login").style.display="none";
                     document.getElementById("logout").style.display="block";
@@ -94,18 +99,14 @@
                     console.log("rip");
                 }
             });
-            firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-                var errorCode = error.code;
-                var errorMsg = error.message;
-                alert(errorMsg);
-                console.log(error);
-            });
         }
         
         function myLogOut() {
             firebase.auth().signOut().then(function() {
                 //user is logged out, hide logout and display login/sign up
                 console.log("logout success");
+                signedIn = 0;
+                alias = "";
                 document.getElementById("logout").style.display="none";
                 document.getElementById("signin").style.display="block";
                 document.getElementById("login").style.display="block";
@@ -113,13 +114,48 @@
                 console.log(error);
             });
         }
+        
+        
+        function restart() {
+            if(signedIn == 1) {
+                var currUser = firebase.auth().currentUser;
+                if(currUser == null) {
+                    setTimeout(function() {}, 3000);
+                }
+                console.log("profile: " + currUser.displayName + " alias: " + alias);
+                //var email = currUser.email;
+                var usersRef = firebase.database().ref("users/" + alias);
+                var points = document.getElementById("score").innerHTML;
+                var p = parseInt(points);
+                var ref = firebase.database().ref("users/" + alias);
+                var child;
+                //console.log(ref);
+                ref.once("value").then(function(snapshot) {
+                    child = snapshot.child("score").val();
+                    console.log("child: " + child);
+                })
+                setTimeout(function(){ 
+                var childint = parseInt(child);
+                console.log("p: " + p + " child: " + childint);
+                if(p > child) {
+                    usersRef.update({score: p});
+                } }, 3000);
+            }
+            document.getElementById("find").style.display="none";
+            document.getElementById("outer").style.display = "none";
+            document.getElementById("scorepanel").style.display = "none";
+            document.getElementById("rules").style.display="block";
+            document.getElementById("restart").style.display="none";
+            document.getElementById("score").innerHTML="0";
+        }
     </script>
       
       <!-- bootstrap -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <link rel="stylesheet" href="stylesheets/style.css">
-    <link href='https://fonts.google.com/specimen/Inconsolata?selection.family=Inconsolata' rel='stylesheet' type='text/css'/>
+ <!--    <link href='https://fonts.google.com/specimen/Inconsolata?selection.family=Inconsolata' rel='stylesheet' type='text/css'/> -->
+      <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
   </head>
 
     <!-- navbar -->
@@ -194,7 +230,6 @@
     
   <body>
       <script src ="javascript/maybe.js"></script>
-    <h1> Color Confusion</h1>
       <div class="container" id="rules">
             <div class="jumbotron">
                 <h2>Rules</h2>
@@ -208,44 +243,58 @@
       
       <h2 id="find" style="display: none"> Find the word... </h2> 
       <div class="container" style="display: none" id="scorepanel">
-          <div class = row> 
-            <div class="col-sd-6">
-              <h3> Score: </h3>
-              </div>
-              <div class="col-sd-6">
-              <h3 id="score"> 0 </h3>
-              </div>
-          </div>
+          <h3>Score:</h3>
+          <h3 id="score">0</h3>
+          <button type="button" class="btn btn-default" onclick="restart()" style="display: none" id="restart">Restart</button>
       </div>
-
     
-    <div id="outer" class = "container" style="display: none">
-        <div id="A" class = "jumbotron" onclick="checkA();">
-            <p id="wordA">Red</p>
-        </div>
-        <div id="B" class = "jumbotron" onclick="checkB();">
-            <p id="wordB">Orange</p>
-        </div>
-        <div id="C" class = "jumbotron" onclick="checkC();">
-            <p id="wordC">Yellow</p>
-        </div>
-        <div id="D" class = "jumbotron" onclick="checkD();">
-            <p id="wordD">Green</p>
-        </div>
-        <div id="E" class = "jumbotron" onclick="checkE();">
-            <p id="wordE">Blue</p>
-        </div>
-        <div id="F" class = "jumbotron" onclick="checkF();">
-            <p id="wordF">Indigo</p>
-        </div>
-        <div id="G" class = "jumbotron" onclick="checkG();">
-            <p id="wordG">Violet</p>
-        </div>
-        <div id="H" class = "jumbotron" onclick="checkH();">
-            <p id="wordH">Violet</p>
-        </div>
-        <div id="I" class = "jumbotron" onclick="checkI();">
-            <p id="wordI">Violet</p>
+    <div id="outer" class = "container-fluid" style="display: none">
+        <div class="row">
+            <div class="col-md-4">
+                <div id="A" class = "circle" onclick="checkA();">
+                    <p id="wordA">Red</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="B" class = "circle" onclick="checkB();">
+                    <p id="wordB">Orange</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="C" class = "circle" onclick="checkC();">
+                    <p id="wordC">Yellow</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="D" class = "circle" onclick="checkD();">
+                    <p id="wordD">Green</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="E" class = "circle" onclick="checkE();">
+                    <p id="wordE">Blue</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="F" class = "circle" onclick="checkF();">
+                    <p id="wordF">Indigo</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="G" class = "circle" onclick="checkG();">
+                    <p id="wordG">Violet</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="H" class = "circle" onclick="checkH();">
+                    <p id="wordH">Violet</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="I" class = "circle" onclick="checkI();">
+                    <p id="wordI">Violet</p>
+                </div>
+            </div>
         </div>
       </div>
       <!--<script src ="javascript/maybe.js"></script>-->

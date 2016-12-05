@@ -61,6 +61,7 @@ function color_confusion() {
     ans = Math.floor(Math.random() * 9);
     // Display what to look for
     document.getElementById("find").innerHTML = "Find: " + colors[ans];
+    document.getElementById("restart").style.display = "none";
     document.getElementById("outer").style.display = "block";
     document.getElementById("find").style.display = "block";
     document.getElementById("scorepanel").style.display = "block";
@@ -75,8 +76,10 @@ function correct() {
 
 // If they got it wrong
 function incorrect() {
-    document.getElementById("find").innerHTML = "Incorrect, game over. You're score was " + score + ". Click start to play again."
-    document.getElementById("score").innerHTML = "0";
+    alert("Incorrect! You got a score of " + score + "!");
+    document.getElementById("find").innerHTML = "You lose!";
+    document.getElementById("restart").style.display="block";
+    //document.getElementById("score").innerHTML = "0";
     score = 0;
 }
 
