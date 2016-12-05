@@ -37,7 +37,7 @@ function color_confusion() {
     // right answer: add points loop
     // wrong answer: game over
 
-    var colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "White", "Black", "Gray", "Saddlebrown"];
+    var colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "White", "Black", "Gray"];
     var i;
     
     // shuffle background color
