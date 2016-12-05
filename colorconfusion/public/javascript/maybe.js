@@ -10,7 +10,8 @@ function shuffle(array) {
     while (m) {
 
     // Pick a remaining element…
-        i = Math.floor(Math.random() * (m - 1));
+        i = Math.floor(Math.random() * m);
+        m = m - 1;
 
         // And swap it with the current element.
         t = array[m];
@@ -31,7 +32,9 @@ function color_confusion() {
     // right answer: add points loop
     // wrong answer: game over
 	
-    var jumbo = [document.getElementById("A"),  document.getElementById("B"), 
+    /*
+    var jumbo = [document.getElementById("A"), 
+                 document.getElementById("B"), 
                 document.getElementById("C"),
                 document.getElementById("D"),
                  document.getElementById("E"),
@@ -48,6 +51,7 @@ function color_confusion() {
                  document.getElementById("wordG"),
                  document.getElementById("wordH"),
                  document.getElementById("wordI")];
+                 */
     var colors = ["red", "orange", "yellow", "green", "blue", "purple", "white", "black", "gray", "saddlebrown"];
     var i;
     
@@ -55,9 +59,12 @@ function color_confusion() {
     
     colors = shuffle(colors);
     
-    words[0].textContent = "Hello World";
-    
+    // words[0].innerHTML = "Hello World";
+     document.getElementById("wordA").innerHTML = colors[4];
+    /*
     for (i = 0; i < 9; i + 1) {
         jumbo[i].style.background = colors[i];
+        document.getElementById("wordA").textContent = colors[i];
     }
+    */
 }
