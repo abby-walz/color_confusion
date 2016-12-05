@@ -27,6 +27,7 @@ h1 {
 #outer {
     width: 80vmin;
     height: 80vmin;
+    color:darkgrey;
 }
 
 img {
@@ -59,6 +60,14 @@ img {
 
 #G {
     background-color: orange;
+}
+
+#H {
+    background-color: white;
+}
+
+#I {
+    background-color: black;
 }
 
 #game {
