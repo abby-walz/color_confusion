@@ -1,12 +1,12 @@
 // game.js
 // Color Confusion
 
-// Fisher-Yates shuffle
-// source: https://bost.ocks.org/mike/shuffle/
-
-// global
+// global variables
 var ans;
 var score = 0;
+
+// Fisher-Yates shuffle
+// source: https://bost.ocks.org/mike/shuffle/
 
 function shuffle(array) {
     var m = array.length, t, i;
@@ -28,17 +28,8 @@ function shuffle(array) {
 }
 
 function color_confusion() {
-	// shuffle word array
-    // shuffle color array
-    // change A-G colors
-    // change wordA-wordG
-    // chose a random number between 0-6
-    // use to know witch is the right answer
-    // right answer: add points loop
-    // wrong answer: game over
 
     var colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "White", "Black", "Gray"];
-    var i;
     
     // shuffle background color
     colors = shuffle(colors);
@@ -52,7 +43,7 @@ function color_confusion() {
      document.getElementById("H").style.backgroundColor = colors[7];
      document.getElementById("I").style.backgroundColor = colors[8];
     
-    // change words
+    // shuffle the words
     colors = shuffle(colors);
      document.getElementById("wordA").innerHTML = colors[0];
      document.getElementById("wordB").innerHTML = colors[1];
@@ -64,22 +55,27 @@ function color_confusion() {
      document.getElementById("wordH").innerHTML = colors[7];
      document.getElementById("wordI").innerHTML = colors[8];
     
-    // generate answer / question
+    // Randomly pick one of one of the array elements  
     ans = Math.floor(Math.random() * 9);
-    document.getElementById("find").innerHTML = colors[ans];
+    // Display what to look for
+    document.getElementById("find").innerHTML = "Find: " + colors[ans];
 }
 
+// If they got it right
 function correct() {
     score = score + 5;
     document.getElementById("score").innerHTML = score;
     color_confusion();
 }
 
+// If they got it wrong
 function incorrect() {
     document.getElementById("find").innerHTML = "Incorrect, game over. You're score was " + score + ". Click start to play again."
     document.getElementById("score").innerHTML = "0";
     score = 0;
 }
+
+// Check if they got it right or not
 
 function checkA() { 
     if (ans == "0") {
