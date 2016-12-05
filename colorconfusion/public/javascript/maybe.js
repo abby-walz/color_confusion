@@ -99,7 +99,6 @@ function checkB() {
 }
 function checkC() {
     if (ans == "2") {
-        score = score + 5;
       correct();
     }
     else {
@@ -108,7 +107,6 @@ function checkC() {
 }
 function checkD() {
     if (ans == "3") {
-        score = score + 5;
       correct();
     }
     else {
