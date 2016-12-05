@@ -62,7 +62,7 @@ function color_confusion() {
     // Display what to look for
     document.getElementById("find").innerHTML = "Find: " + colors[ans];
     document.getElementById("outer").style.display = "block";
-    document.getElementById("find2").style.display = "block";
+    document.getElementById("find").style.display = "block";
     document.getElementById("scorepanel").style.display = "block";
 }
 
