@@ -4,6 +4,7 @@
  // Fisher-Yates shuffle
 // source: https://bost.ocks.org/mike/shuffle/
 
+/*
 function shuffle(array) {
     var m = array.length, t, i;
 
@@ -21,6 +22,7 @@ function shuffle(array) {
 
     return array;
 }
+*/
 
 function color_confusion() {
 	// shuffle word array
@@ -53,10 +55,12 @@ function color_confusion() {
     var i;
     
     // shuffle background color
+    /*
     colors = shuffle(colors);
     for (i = 0; i < 9; i + 1) {
         jumbo[i].style.background = colors[i];
     }
+    */
     
 
 }
