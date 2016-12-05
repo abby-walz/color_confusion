@@ -52,19 +52,32 @@ function color_confusion() {
                  document.getElementById("wordH"),
                  document.getElementById("wordI")];
                  */
-    var colors = ["red", "orange", "yellow", "green", "blue", "purple", "white", "black", "gray", "saddlebrown"];
+    var colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "White", "Black", "Gray", "Saddlebrown"];
     var i;
     
     // shuffle background color
+    colors = shuffle(colors);
+    document.getElementById("A").style.backgroundColor = colors[0];
+     document.getElementById("B").style.backgroundColor = colors[1];
+     document.getElementById("C").style.backgroundColor = colors[2];
+     document.getElementById("D").style.backgroundColor = colors[3];
+     document.getElementById("E").style.backgroundColor = colors[4];
+     document.getElementById("F").style.backgroundColor = colors[5];
+     document.getElementById("G").style.backgroundColor = colors[6];
+     document.getElementById("H").style.backgroundColor = colors[7];
+     document.getElementById("I").style.backgroundColor = colors[8];
     
     colors = shuffle(colors);
     
     // words[0].innerHTML = "Hello World";
-     document.getElementById("wordA").innerHTML = colors[4];
-    /*
-    for (i = 0; i < 9; i + 1) {
-        jumbo[i].style.background = colors[i];
-        document.getElementById("wordA").textContent = colors[i];
-    }
-    */
+     document.getElementById("wordA").innerHTML = colors[0];
+     document.getElementById("wordB").innerHTML = colors[1];
+     document.getElementById("wordC").innerHTML = colors[2];
+     document.getElementById("wordD").innerHTML = colors[3];
+     document.getElementById("wordE").innerHTML = colors[4];
+     document.getElementById("wordF").innerHTML = colors[5];
+     document.getElementById("wordG").innerHTML = colors[6];
+     document.getElementById("wordH").innerHTML = colors[7];
+     document.getElementById("wordI").innerHTML = colors[8];
+    
 }
