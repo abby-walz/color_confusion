@@ -36,27 +36,7 @@ function color_confusion() {
     // use to know witch is the right answer
     // right answer: add points loop
     // wrong answer: game over
-	
-    /*
-    var jumbo = [document.getElementById("A"), 
-                 document.getElementById("B"), 
-                document.getElementById("C"),
-                document.getElementById("D"),
-                 document.getElementById("E"),
-                 document.getElementById("F"),
-                 document.getElementById("G"),
-                 document.getElementById("H"),
-                 document.getElementById("I")];
-    var words = [document.getElementById("wordA"),
-                 document.getElementById("wordB"),
-                 document.getElementById("wordC"),
-                 document.getElementById("wordD"),
-                 document.getElementById("wordE"),
-                 document.getElementById("wordF"),
-                 document.getElementById("wordG"),
-                 document.getElementById("wordH"),
-                 document.getElementById("wordI")];
-                 */
+
     var colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "White", "Black", "Gray", "Saddlebrown"];
     var i;
     
@@ -89,57 +69,89 @@ function color_confusion() {
     document.getElementById("find").innerHTML = colors[ans];
 }
 
+function correct() {
+    score = score + 5;
+    document.getElementById("score").innerHTML = score;
+    color_confusion();
+}
+
+function incorrect() {
+    document.getElementById("find").innerHTML = "Incorrect, game over. You're score was " + score + ". Click start to play again."
+    document.getElementById("score").innerHTML = "0";
+    score = 0;
+}
+
 function checkA() { 
     if (ans == "0") {
-        score = score + 5;
-        document.getElementById("score").innerHTML = score;
+        correct();
+    }
+    else {
+        incorrect();
     }
 }
 function checkB() {
     if (ans == "1") {
-        score = score + 5;
-        document.getElementById("score").innerHTML = score;
+      correct();
+    }
+    else {
+        incorrect();
     }
 }
 function checkC() {
     if (ans == "2") {
         score = score + 5;
-        document.getElementById("score").innerHTML = score;
+      correct();
+    }
+    else {
+        incorrect();
     }
 }
 function checkD() {
     if (ans == "3") {
         score = score + 5;
-        document.getElementById("score").innerHTML = score;
+      correct();
+    }
+    else {
+        incorrect();
     }
 }
 function checkE() {
     if (ans == "4") {
-        score = score + 5;
-        document.getElementById("score").innerHTML = score;
+      correct();
+    }
+    else {
+        incorrect();
     }
 }
 function checkF() {
     if (ans == "5") {
-        score = score + 5;
-        document.getElementById("score").innerHTML = score;
+      correct();
+    }
+    else {
+        incorrect();
     }
 }
 function checkG() {
     if (ans == "6") {
-        score = score + 5;
-        document.getElementById("score").innerHTML = score;
+      correct();
+    }
+    else {
+        incorrect();
     }
 }
 function checkH() {
     if (ans == "7") {
-        score = score + 5;
-        document.getElementById("score").innerHTML = score;
+      correct();
+    }
+    else {
+        incorrect();
     }
 }
 function checkI() {
     if (ans == "8") {
-        score = score + 5;
-        document.getElementById("score").innerHTML = score;
+       correct();
+    }
+    else {
+        incorrect();
     }
 }
