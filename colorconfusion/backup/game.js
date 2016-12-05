@@ -12,6 +12,7 @@ color_possibilities["indigo"] = "#FFFFFF"
 
 var score = 0;
 var colorArray = ["red", "orange", "yellow", "green", "blue", "purple", "white", "black", "gray", "saddlebrown"];
+var answer;
 //var circleID = ["11", "22", "33", "44", "55", "66", "77", "88", "99"];
 
 function gameStart() {
@@ -19,7 +20,8 @@ function gameStart() {
     //assign each circle a different color and predetermines answer
     var rngesus = 0;
     var luckyNum = Math.floor(Math.random() * (9-0+1)) + 0; //num corresponds to a color in array [0 - 9]
-    //set text at top of page
+    //set text at top of page and set answer
+    answer = colorArray[luckyNum];
     if(colorArray[luckyNum]=="saddlebrown") {
         document.getElementById("game").innerHTML = "Color: brown";
     }
@@ -73,7 +75,7 @@ function gameStart() {
 }
 
 function checkAnswer(clicked_id) {
-    alert(clicked_id);
+    
 }
 
 //wjfiowefjowefjoweijfw

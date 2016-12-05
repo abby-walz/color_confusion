@@ -10,6 +10,10 @@
       
       <!-- firebase; must be at end of html but before other scripts -->
 <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase-database.js"></script>
+      
 <script>
   // Initialize Firebase
   var config = {
@@ -22,20 +26,188 @@
   firebase.initializeApp(config);
 </script>
       
+           <!-- sign up, log in, and log out script -->
+    <script>
+        function mySignUp() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("pw").value;
+            var alias = document.getElementById("alias").value;
+            //console.log("Email: " + email);
+            //console.log("Password: " + password);
+            var errorCode = null;
+            var errorMsg = null;
+            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+                errorCode = error.code;
+                errorMsg = error.message;
+                alert(errorMsg);
+                console.log(error);
+            });
+            if(errorCode == null) {
+                firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+                    console.log(error);
+                })
+                firebase.auth().onAuthStateChanged(function(user) {
+                    if(user) {
+                        document.getElementById("signin").style.display="none";
+                        document.getElementById("login").style.display="none";
+                        document.getElementById("logout").style.display="block";
+                        var usersRef = firebase.database().ref('users/');
+                        var userRef = usersRef.child(alias);
+                        userRef.set({
+                            score: 0
+                        })
+                    }
+                })
+                //initialize user into database with score of 0
+                //var usersRef = firebase.database().ref('users/');
+                //var userRef = usersRef.child(alias);
+                //userRef.set({
+                //    score: 0
+                //})
+                //var newUserRef = userRef.push();
+                //newUserRef.set({
+                //    "alias" : 0
+                //})
+                //var path = newUserRef.toString();
+                //console.log(path);
+                //databaseRef.ref('users/' + alias).set({
+                //    score: 0;
+                //})
+            }
+        }
+               
+        function myLogin() {
+            var email = document.getElementById("loginEmail").value;
+            var password = document.getElementById("loginPw").value;
+            console.log("Email: " + email);
+            console.log("Password: " + password);
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    // User is signed in, hide login/sign up and display logout
+                    console.log("user: " + user.email);
+                    document.getElementById("signin").style.display="none";
+                    document.getElementById("login").style.display="none";
+                    document.getElementById("logout").style.display="block";
+                    
+                } else {
+                    // No user is signed in.
+                    console.log("rip");
+                }
+            });
+            firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+                var errorCode = error.code;
+                var errorMsg = error.message;
+                alert(errorMsg);
+                console.log(error);
+            });
+        }
+        
+        function myLogOut() {
+            firebase.auth().signOut().then(function() {
+                //user is logged out, hide logout and display login/sign up
+                console.log("logout success");
+                document.getElementById("logout").style.display="none";
+                document.getElementById("signin").style.display="block";
+                document.getElementById("login").style.display="block";
+            }, function(error) {
+                console.log(error);
+            });
+        }
+    </script>
+      
       <!-- bootstrap -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <link rel="stylesheet" href="stylesheets/style.css">
     <link href='https://fonts.google.com/specimen/Inconsolata?selection.family=Inconsolata' rel='stylesheet' type='text/css'/>
-      <script src ="javascript/maybe.js"></script>
   </head>
 
+    <!-- navbar -->
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+    <a class="navbar-brand" href="#">Color Confusion</a>
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="#" data-toggle="modal" data-target="#signUpModal" id="signin">Sign up</a></li>
+        <li><a href="#" data-toggle="modal" data-target="#loginModal" id="login">Log in</a></li>
+        <li><a href="#" style="display: none" onclick="myLogOut()" id="logout">Log out</a></li>
+    </ul>
+    </div>
+</nav>
+    
+    <!-- sign up modal -->
+<!--    <script src="javascript/auth.js"></script> -->
+<div class="modal fade signUpModal" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="Sign Up">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="signUp">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h1 class="modal-title">Sign up</h1>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="pw">Password:</label>
+                        <input type="password" class="form-control" id="pw">
+                    </div>
+                    <div class="form-group">
+                        <label for="alias">Alias:</label>
+                        <input type="text" class="form-control" id="alias">
+                    </div>
+                    <button type="button" class="btn btn-default" onclick="mySignUp()" data-dismiss="modal" id="signupButton">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- log in modal -->
+<div class="modal fade loginModal" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Log In">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="signUp">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h1 class="modal-title">Log In</h1>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="loginEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="pw">Password:</label>
+                        <input type="password" class="form-control" id="loginPw">
+                    </div>
+                    <button type="button" class="btn btn-default" onclick="myLogin()" data-dismiss="modal" id="loginButton">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+    <!-- game begin -->
+    
   <body>
+      <script src ="javascript/maybe.js"></script>
     <h1> Color Confusion</h1>
-      <button type="button" onclick="color_confusion();">Start</button>
+      <div class="container" id="rules">
+            <div class="jumbotron">
+                <h2>Rules</h2>
+                <h4>Click on the circle with the word that matches the word displayed at the top.<br>
+                Game ends upon clicking on the incorrect circle.</h4>
+                <button type="button" class="btn btn-default" onclick="color_confusion();">Start</button>
+            </div>
+        </div>
       
-      <h2 id="find"> Find the word... </h2> 
-      <div class="container">
+      <!--<button type="button" onclick="color_confusion();">Start</button>-->
+      
+      <h2 id="find" style="display: none"> Find the word... </h2> 
+      <div class="container" style="display: none" id="scorepanel">
           <div class = row> 
             <div class="col-sd-6">
               <h3> Score: </h3>
@@ -45,37 +217,38 @@
               </div>
           </div>
       </div>
-      
-    <div id="outer" class = "container">
-        <div id="A" class = "jumbotron" onclick="checkA();">
+
+    
+    <div id="outer" class = "container" style="display: none">
+        <div id="A" class = "jumbotron">
             <p id="wordA">Red</p>
         </div>
-        <div id="B" class = "jumbotron" onclick="checkB();">
+        <div id="B" class = "jumbotron">
             <p id="wordB">Orange</p>
         </div>
-        <div id="C" class = "jumbotron" onclick="checkC();">
+        <div id="C" class = "jumbotron">
             <p id="wordC">Yellow</p>
         </div>
-        <div id="D" class = "jumbotron" onclick="checkD();">
+        <div id="D" class = "jumbotron">
             <p id="wordD">Green</p>
         </div>
-        <div id="E" class = "jumbotron" onclick="checkE();">
+        <div id="E" class = "jumbotron">
             <p id="wordE">Blue</p>
         </div>
-        <div id="F" class = "jumbotron" onclick="checkF();">
+        <div id="F" class = "jumbotron">
             <p id="wordF">Indigo</p>
         </div>
-        <div id="G" class = "jumbotron" onclick="checkG();">
+        <div id="G" class = "jumbotron">
             <p id="wordG">Violet</p>
         </div>
-        <div id="H" class = "jumbotron" onclick="checkH();">
+        <div id="H" class = "jumbotron">
             <p id="wordH">Violet</p>
         </div>
-        <div id="I" class = "jumbotron" onclick="checkI();">
+        <div id="I" class = "jumbotron">
             <p id="wordI">Violet</p>
         </div>
       </div>
-      
+      <!--<script src ="javascript/maybe.js"></script>-->
   </body>
 
 </html>

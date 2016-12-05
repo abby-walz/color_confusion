@@ -8,7 +8,9 @@ var score = 0;
 // Fisher-Yates shuffle
 // source: https://bost.ocks.org/mike/shuffle/
 
+
 function shuffle(array) {
+    document.getElementById("rules").style.display="none";
     var m = array.length, t, i;
 
   // While there remain elements to shuffle…
@@ -59,6 +61,9 @@ function color_confusion() {
     ans = Math.floor(Math.random() * 9);
     // Display what to look for
     document.getElementById("find").innerHTML = "Find: " + colors[ans];
+    document.getElementById("outer").style.display = "block";
+    document.getElementById("find2").style.display = "block";
+    document.getElementById("scorepanel").style.display = "block";
 }
 
 // If they got it right
