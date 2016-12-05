@@ -1,10 +1,8 @@
 // game.js
 // Color Confusion
 
- // Fisher-Yates shuffle
+// Fisher-Yates shuffle
 // source: https://bost.ocks.org/mike/shuffle/
-
-/*
 function shuffle(array) {
     var m = array.length, t, i;
 
@@ -12,17 +10,16 @@ function shuffle(array) {
     while (m) {
 
     // Pick a remaining element…
-        i = Math.floor(Math.random() * m--);
+        i = Math.floor(Math.random() * (m - 1));
 
         // And swap it with the current element.
         t = array[m];
         array[m] = array[i];
         array[i] = t;
-  }
+    }
 
     return array;
 }
-*/
 
 function color_confusion() {
 	// shuffle word array
@@ -34,8 +31,8 @@ function color_confusion() {
     // right answer: add points loop
     // wrong answer: game over
 	
-    var jumbo = [document.getElementById("A"),                document.getElementById("B"), 
-                  document.getElementById("C"),
+    var jumbo = [document.getElementById("A"),  document.getElementById("B"), 
+                document.getElementById("C"),
                 document.getElementById("D"),
                  document.getElementById("E"),
                  document.getElementById("F"),
@@ -55,12 +52,12 @@ function color_confusion() {
     var i;
     
     // shuffle background color
-    /*
+    
     colors = shuffle(colors);
+    
+    words[0].textContent = "Hello World";
+    
     for (i = 0; i < 9; i + 1) {
         jumbo[i].style.background = colors[i];
     }
-    */
-    
-
 }
